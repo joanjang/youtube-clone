@@ -1,10 +1,11 @@
 import express from "express";
 
 const app = express();
+const gossipMiddleware = (req, res, next) => {
+    console.log( `Someone is going to: ${req.url}` );
+    next();
+}
 
-app.get( "/", ( req, res ) => res.send( "Here is HomePage" ) );
-app.get( "/about", ( req, res ) => res.send( "Here is AboutPage" ) );
-app.get( "/contact", ( req, res ) => res.send( "Here is ContactPage" ) );
-app.get( "/login", ( req, res ) => res.send( "Here is LoginPage" ) );
+app.get( "/", gossipMiddleware, ( req, res ) => res.send( "Here is HomePage" ) );
 
 app.listen( 4000 );
