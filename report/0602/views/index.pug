@@ -1,0 +1,9 @@
+doctype html
+html(lang="ko")
+    include partials/head
+    body
+        main
+            include partials/header
+            if search
+                include partials/search
+            block content

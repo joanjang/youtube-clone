@@ -1,0 +1,7 @@
+extends index
+include mixins/list
+
+block content
+    div
+        each movie in movies
+            +movie(movie)
