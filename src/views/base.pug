@@ -2,10 +2,14 @@ doctype html
 html(lang="ko")
     head
         title #{pageTitle} | Wetube
-        link(rel="stylesheet" href="https://unpkg.com/mvp.css")
+        link( rel="stylesheet" href="https://unpkg.com/mvp.css" )
     body
         header
             h1=pageTitle
+            nav
+                ul
+                    li
+                        a( href="/videos/upload" ) Upload Video
         main
             block content
     include partials/footer
