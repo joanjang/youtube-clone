@@ -1,0 +1,8 @@
+extends templates/layout
+
+block content
+    form( method="POST" )
+        input(placeholder="Title", type="text" name="title")
+        textarea(placeholder="Synopsis", name="synopsis")
+        input(placeholder="Genres", type="text" name="genres")
+        button Add Movie

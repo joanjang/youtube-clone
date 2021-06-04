@@ -1,0 +1,7 @@
+extends templates/layout
+include mixins/movie
+
+block content
+  h1=pageTitle
+  each movie in movies
+    +movieMixin(movie)

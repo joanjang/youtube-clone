@@ -1,0 +1,9 @@
+extends templates/layout
+
+block content
+  h1=movie.title
+  p=movie.synopsis
+  if movie.genres
+    ul
+      each genre in movie.genres
+        li=genre
