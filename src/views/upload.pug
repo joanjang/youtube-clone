@@ -3,4 +3,6 @@ extends base
 block content
     form( method="POST" )
         input( name="title", placeholder="Title", type="text", required )
+        input( name="description", placeholder="Description", type="text", required )
+        input( name="hashtags", placeholder="Hashtags, seperated by comma.", type="text", required )
         input( value="Upload Video", type="submit" )
