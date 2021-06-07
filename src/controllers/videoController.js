@@ -3,6 +3,7 @@ import Video from "../models/Video";
 export const home = async (req, res) => {
   try {
     const videos = await Video.find( {} );
+    console.log( videos );
     return res.render( "home", { pageTitle: "Home", videos } );
   } catch ( e ) {
     return res.render( "error-search", { pageTitle: "Error", e } );
@@ -31,16 +32,12 @@ export const postUpload = async ( req, res ) => {
     await Video.create({
       title,
       description,
-      createdAt: Date.now(),
-      hashtags: hashtags.split( "," ).map( (word) => `#${word}` ),
-      meta: {
-        views: 0,
-        rating: 0
-      }
+      hashtags: hashtags.split( "," ).map( (word) => `#${word}` )
     });
+    return res.redirect("/");
   } catch (e) {
     console.log(e);
-  }
+    return res.render( "upload", { pageTitle: "Upload Video", errorMessage: e._message } );
+  };
 
-  return res.redirect("/");
 }
