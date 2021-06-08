@@ -1,0 +1,11 @@
+extends layouts/layout
+include mixins/movie
+
+block content
+    form( method="GET" )
+        input(name="keyword", type="text", placeholder="search by title")
+        input(type="submit", value="Search now")
+    hr
+    div
+        each movie in movies
+            +movie(movie)

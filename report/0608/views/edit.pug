@@ -1,0 +1,11 @@
+extends layouts/layout
+
+block content
+    h4 Update #{movie.title}
+    form( method="POST" )
+        input( name="title", placeholder="Title", value=movie.title, type="text", maxlength=80 )
+        input( name="summary", placeholder="Summary", value=movie.summary, type="text", required, minlength=5 )
+        input( name="year", placeholder="Year", value=movie.year, type="text", required )
+        input( name="rating", placeholder="Rating", value=movie.rating, type="number", min=0, required )
+        input( name="genres", placeholder="Genres, seperated by comma,", value=movie.genres.join(), type="text" )
+        input( value="Update Movie", type="submit" )

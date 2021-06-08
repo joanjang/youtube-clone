@@ -1,0 +1,9 @@
+extends layouts/layout
+
+block content
+    div
+        H1= movie.title
+        p= movie.summary
+    a(href=`${movie.id}/edit`) Edit &rarr;
+    br
+    a(href=`${movie.id}/delete`) Delete &rarr;

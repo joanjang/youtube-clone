@@ -1,0 +1,12 @@
+extends layouts/layout
+
+block content
+    if e
+        span=e._message
+    form( method="POST" )
+        input( name="title", placeholder="Title", type="text", maxlength=80 )
+        input( name="summary", placeholder="Summary", type="text", required, minlength=5 )
+        input( name="year", placeholder="Year", type="text", required )
+        input( name="rating", placeholder="Rating", type="number", min=0, required )
+        input( name="genres", placeholder="Genres, seperated by comma,", type="text" )
+        input( value="Upload movie", type="submit" )
