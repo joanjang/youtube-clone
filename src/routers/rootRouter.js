@@ -5,7 +5,7 @@ import { home, search } from "../controllers/videoController";
 const rootRouter = express.Router();
 
 rootRouter.get( "/", home ); 
-rootRouter.roLute( "/join" ).get( getJoin ).post( postJoin ); 
+rootRouter.route( "/join" ).get( getJoin ).post( postJoin ); 
 rootRouter.get( "/login", login ); 
 rootRouter.get( "/search", search ); 
 
