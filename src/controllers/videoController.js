@@ -6,7 +6,7 @@ export const home = async (req, res) => {
     console.log( videos );
     return res.render( "home", { pageTitle: "Home", videos } );
   } catch ( e ) {
-    return res.render( "error-search", { pageTitle: "Error", e } );
+    return res.status(404).render( "error-search", { pageTitle: "Error", e } );
   }
 }
 export const watch = async ( req, res ) => {
@@ -29,7 +29,7 @@ export const postEdit = async ( req, res ) => {
     const { id } = req.params;
     const { title, description, hashtags } = req.body;
     if( await !Video.exists( { _id: id } ) ) {
-      return res.render( "404", { pageTitle: "Video not found" } );
+      return res.status(404).render( "404", { pageTitle: "Video not found" } );
     }
     await Video.findByIdAndUpdate( id, {
       title, 
@@ -52,7 +52,7 @@ export const postUpload = async ( req, res ) => {
     return res.redirect("/");
   } catch (e) {
     console.log(e);
-    return res.render( "upload", { pageTitle: "Upload Video", errorMessage: e._message } );
+    return res.status(400).render( "upload", { pageTitle: "Upload Video", errorMessage: e._message } );
   };
 }
 export const deleteVideo = async ( req, res ) => {
