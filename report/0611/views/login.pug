@@ -1,0 +1,10 @@
+extends templates/layout
+
+block content
+  if errMsg
+    span=errMsg
+  form( method="POST" )
+    input(name="username", placeholder="USER NAME", type="text", required )
+    input(name="password", placeholder="PASSWORD", type="password", required )
+    input(type="submit", value="LOGIN" )
+    a(href="/join") join &rarr;
