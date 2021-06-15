@@ -42,16 +42,17 @@ export const getUpload = ( req, res ) => {
   return res.render( "upload", { pageTitle: `Uploading Video` } );
 }
 export const postUpload = async ( req, res ) => {
+  const { file } = req;
   const { title, description, hashtags } = req.body;
   try {
     await Video.create({
       title,
       description,
+      fileUrl: file.path,
       hashtags: Video.formatHashtags( hashtags )
     });
     return res.redirect("/");
   } catch (e) {
-    console.log(e);
     return res.status(400).render( "upload", { pageTitle: "Upload Video", errorMessage: e._message } );
   };
 }
