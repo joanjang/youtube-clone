@@ -8,7 +8,6 @@ import userRouter from "./routers/userRouters";
 import videoRouter from "./routers/videoRouters";
 import { localsMiddleware } from "./middlewares";
 
-console.log( process.env.DB_RUL );
 const app = express();
 const logger = morgan( "dev" );
 
