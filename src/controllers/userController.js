@@ -3,7 +3,6 @@ import bcrypt from "bcrypt";
 
 export const getJoin = (req, res) => res.render("join", { pageTitle: "Join" });
 export const postJoin = async (req, res) => {
-  console.log(req.body);
   const { name, username, email, password, password2, location } = req.body;
   const pageTitle = "Join";
   if (password !== password2) {
@@ -49,7 +48,8 @@ export const postLogin = async ( req, res ) => {
   if( !ok ) {
     return res.status( 400 ).render( "login", { pageTitle, errorMessage: "Wrong password" } );
   }
-  console.log( "LOG USER IN! COMONG SOON!" );
+  req.session.loggedIn = true;
+  req.session.user = user;
   res.redirect( "/" );
 }
 export const edit = ( req, res ) => res.send( "Edit User" ); 
