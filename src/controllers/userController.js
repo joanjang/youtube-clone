@@ -52,7 +52,29 @@ export const postLogin = async ( req, res ) => {
   req.session.user = user;
   res.redirect( "/" );
 }
-export const edit = ( req, res ) => res.send( "Edit User" ); 
+export const getEdit = ( req, res ) => res.render( "edit-profile", { pageTitle: "Edit Profile" } ); 
+export const postEdit = async ( req, res ) => {
+  const {
+    session: {
+      user: { _id }
+    },
+    body: { name, email, username, location },
+    file
+  } = req;
+  console.log( file );
+  const updateUser = await User.findByIdAndUpdate(
+    _id,
+    {
+      name,
+      email,
+      username,
+      location
+    },
+    { new: true }
+  );
+  req.session.user = updateUser;
+  return res.redirect( "/users/edit" );
+} 
 export const remove = ( req, res ) => res.send( "Remove User" ); 
 export const logout = ( req, res ) => res.send( "Log out" ); 
 export const see = ( req, res ) => res.send( "See User" ); 

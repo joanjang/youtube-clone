@@ -1,0 +1,15 @@
+extends base
+
+block content
+    form(method="POST", enctype="multipart/form-data")
+        label(for="avatar") Avatar
+        input(name="avatar", id="avatar", type="file", accept="image/*")
+        input(name="name", placeholder="Name", type="text", required, value=loggedInUser.name)
+        input(name="email", placeholder="Email", type="email", required, value=loggedInUser.email)
+        input(name="username", placeholder="UserName", type="text", required, value=loggedInUser.username)
+        input(name="location", placeholder="Location", type="text", required, value=loggedInUser.location)
+        input(type="submit", value="Upload Profile")
+
+        if !loggedInUser.socialOnly
+            hr
+            a(href="change-password") Change Password &rarr;
