@@ -1,6 +1,7 @@
 extends base
 
 block content
+    img(src="/" + loggedInUser.avatarUrl, width="100", heigth="100")
     form(method="POST", enctype="multipart/form-data")
         label(for="avatar") Avatar
         input(name="avatar", id="avatar", type="file", accept="image/*")
