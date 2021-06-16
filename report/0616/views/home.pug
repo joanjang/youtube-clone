@@ -1,0 +1,9 @@
+extends layouts/layout
+
+block content
+    if errMsg
+        h6=errMsg
+    form(method="POST", enctype="multipart/form-data", action="/read")
+        H1 TXT2HTML
+        input(name="textFile", type="file", accept="text/*", required)
+        input(type="submit", value="Convert!")
