@@ -1,1 +1,2 @@
-alert( "hi! its working" );
+import "../scss/styles.scss";
+console.log( "HI~" );
