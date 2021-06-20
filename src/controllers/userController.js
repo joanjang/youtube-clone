@@ -10,7 +10,7 @@ export const postJoin = async (req, res) => {
       pageTitle,
       errorMessage: "Password confirmation does not match.",
     });
-  }
+  };
   const exists = await User.exists({ $or: [{ username }, { email }] });
   if (exists) {
     return res.status(400).render("join", {
@@ -33,10 +33,10 @@ export const postJoin = async (req, res) => {
       errorMessage: e._message
     });
   }
-}
+};
 export const getLogin = ( req, res ) => {
   res.render( "login", { pageTitle: "Login" } ); 
-}
+};
 export const postLogin = async ( req, res ) => {
   const { username, password } = req.body;
   const pageTitle = "Login";
@@ -51,7 +51,35 @@ export const postLogin = async ( req, res ) => {
   req.session.loggedIn = true;
   req.session.user = user;
   res.redirect( "/" );
-}
+};
+export const startGithubLogin = ( req, res ) => {
+  const baseUrl = "https://github.com/login/oauth/authorize";
+  const config = {
+    client_id: process.env_GH_CL,
+    allow_signup: false,
+    scope: "read:user user:email"
+  }
+  const params = new URLSearchParams( config );
+  res.redirect( `${baseUrl}?${params}` );
+};
+export const finishGithubLogin = async (req, res) => {
+  const baseUrl = "https://github.com/login/oauth/access_token";
+  const config = {
+    client_id: process.env.GH_CLIENT,
+    client_secret: process.env.GH_SECRET,
+    code: req.query.code,
+  };
+  const params = new URLSearchParams(config).toString();
+  const finalUrl = `${baseUrl}?${params}`;
+  const data = await fetch(finalUrl, {
+    method: "POST",
+    headers: {
+      Accept: "application/json",
+    },
+  });
+  const json = await data.json();
+  console.log(json);
+};
 export const getEdit = ( req, res ) => res.render( "edit-profile", { pageTitle: "Edit Profile" } ); 
 export const postEdit = async ( req, res ) => {
   const {
@@ -74,7 +102,7 @@ export const postEdit = async ( req, res ) => {
   );
   req.session.user = updateUser;
   return res.redirect( "/users/edit" );
-} 
+};
 export const remove = ( req, res ) => res.send( "Remove User" ); 
 export const logout = ( req, res ) => res.send( "Log out" ); 
 export const see = ( req, res ) => res.send( "See User" ); 
