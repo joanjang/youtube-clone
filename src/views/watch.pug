@@ -5,8 +5,11 @@ block content
     div
         button#play Play
         button#mute Mute
-        span#time 00:00/00:00
         input(type="range", step="0.1", min="0", max="1")#volume
+        div
+            span#currentTime 00:00
+            span  / 
+            span#totalTime 00:00
     //
         div
             p=video.description
@@ -16,4 +19,4 @@ block content
         a(href=`${video.id}/delete`) Delete Video &rarr;
 
 block scripts 
-    script(src="/assets/videoPlayer.js")
+    script(src="/assets/js/videoPlayer.js")
