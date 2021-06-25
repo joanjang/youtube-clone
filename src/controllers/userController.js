@@ -1,4 +1,5 @@
 import User from "../models/User";
+import fetch from "node-fetch";
 import bcrypt from "bcrypt";
 
 export const getJoin = (req, res) => res.render("join", { pageTitle: "Join" });
@@ -8,7 +9,7 @@ export const postJoin = async (req, res) => {
   if (password !== password2) {
     return res.status(400).render("join", {
       pageTitle,
-      errorMessage: "Password confirmation does not match.",
+      errorMessage: "Password confirmation does not match."
     });
   };
   const exists = await User.exists({ $or: [{ username }, { email }] });
@@ -55,7 +56,7 @@ export const postLogin = async ( req, res ) => {
 export const startGithubLogin = ( req, res ) => {
   const baseUrl = "https://github.com/login/oauth/authorize";
   const config = {
-    client_id: process.env_GH_CL,
+    client_id: process.env.GH_CLIENT,
     allow_signup: false,
     scope: "read:user user:email"
   }
@@ -67,18 +68,31 @@ export const finishGithubLogin = async (req, res) => {
   const config = {
     client_id: process.env.GH_CLIENT,
     client_secret: process.env.GH_SECRET,
-    code: req.query.code,
+    code: req.query.code
   };
   const params = new URLSearchParams(config).toString();
   const finalUrl = `${baseUrl}?${params}`;
-  const data = await fetch(finalUrl, {
-    method: "POST",
-    headers: {
-      Accept: "application/json",
-    },
-  });
-  const json = await data.json();
-  console.log(json);
+  const tokenRequest = await ( 
+    await fetch(finalUrl, {
+      method: "POST",
+      headers: {
+        Accept: "application/json",
+      },
+    })
+  ).json();
+  if( "access_token" in tokenRequest ) {
+    const { access_token } = tokenRequest;
+    const userRequest = await (
+      await fetch("https://api.github.com/user", {
+        headers: {
+          Authorization: `token ${access_token}`
+        }
+      })
+    ).json();
+    console.log( userRequest );
+  } else {
+    return res.redirect( "/login" );
+  }
 };
 export const getEdit = ( req, res ) => res.render( "edit-profile", { pageTitle: "Edit Profile" } ); 
 export const postEdit = async ( req, res ) => {
