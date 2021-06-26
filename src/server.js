@@ -23,18 +23,6 @@ app.use( session ( {
     store: MongoStore.create({ mongoUrl: process.env.DB_URL })
 } ) );
 
-app.use( ( req, res, next ) => {
-    req.sessionStore.all( ( error, sessions ) => {
-        console.log( sessions );
-        next();
-    } );
-} );
-
-app.get("/add-one", ( req, res, next ) => {
-    req.sessiont.apple += 1;
-    return res.send( `${req.session.id} ${req.session.apple}`);
-} );
-
 app.use( localsMiddleware );
 app.use( "/uploads", express.static("uploads") );
 app.use( "/assets", express.static("assets") );
