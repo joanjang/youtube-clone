@@ -4,6 +4,19 @@ block content
     div#videoContainer
         video(src="/" + video.fileUrl)
         div
+            p=video.description
+            small=video.createdAt
+        div
+            small Uploaded by 
+                a(href=`/users/${video.owner._id}`)=video.owner.name
+        
+        if String( video.owner._id ) === String( loggedInUser._id )
+            a(href=`${video.id}/edit`) Edit Video &rarr;
+            br
+            a(href=`${video.id}/delete`) Delete Video &rarr;
+
+    // 
+        div
             button#play Play
             button#mute Mute
             input(type="range", step="0.1", min="0", max="1")#volume
@@ -15,14 +28,5 @@ block content
                 input(type="range", step="1", min="0", value= "0")#timeline
             div
                 button#fullScreen Enter Full Screen
-
-    //
-        div
-            p=video.description
-            small=video.createdAt 
-        a(href=`${video.id}/edit`) Edit Video &rarr;
-        br
-        a(href=`${video.id}/delete`) Delete Video &rarr;
-
-block scripts 
-    script(src="/assets/js/videoPlayer.js")
+    block scripts 
+        script(src="/assets/js/videoPlayer.js")
