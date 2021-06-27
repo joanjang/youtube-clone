@@ -1,8 +1,7 @@
 extends base
 
 block content
-    img(src="/" + loggedInUser.avatarUrl, width="100", heigth="100")
-    form(method="POST", enctype="multipart/form-data")
+    form(method="POST", enctype="multipart/form-data").edit-profile__form
         label(for="avatar") Avatar
         input(name="avatar", id="avatar", type="file", accept="image/*")
         input(name="name", placeholder="Name", type="text", required, value=loggedInUser.name)
@@ -12,5 +11,5 @@ block content
         input(type="submit", value="Upload Profile")
 
         if !loggedInUser.socialOnly
-            hr
-            a(href="change-password") Change Password &rarr;
+            div.edit-profile__password
+                a(href="change-password") Change Password &rarr;
