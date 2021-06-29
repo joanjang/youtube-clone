@@ -16,6 +16,8 @@
   },
   "homepage": "https://github.com/je0489/wetube#readme",
   "dependencies": {
+    "@ffmpeg/core": "^0.8.5",
+    "@ffmpeg/ffmpeg": "^0.9.7",
     "axios": "^0.21.1",
     "babel-loader": "^8.2.2",
     "bcrypt": "^5.0.1",
