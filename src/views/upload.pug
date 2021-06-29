@@ -2,13 +2,15 @@ extends base
 
 block content
     div
-        button#startBtn start recording
+        button#actionBtn start recording
         video#preview
     if errorMessage
         span=errorMessage
     form( method="POST" enctype="multipart/form-data" )
         label( for="video" ) Video File
         input( name="video", id="video", type="file", accept="video/*", required )
+        label(for="thumb") Thumbnail File
+        input(type="file", accept="image/*", required, id="thumb", name="thumb")
         input( name="title", placeholder="Title", type="text", required, maxlength=80 )
         input( name="description", placeholder="Description", type="text", required, minlength=20 )
         input( name="hashtags", placeholder="Hashtags, seperated by comma.", type="text", required )
